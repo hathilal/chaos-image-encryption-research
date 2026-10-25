@@ -1,0 +1,2 @@
+# Milestone 1 uses only Python's standard library.
+# Later milestones may add NumPy, Matplotlib, Pillow, and analysis tools.
