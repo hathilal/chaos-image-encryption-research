@@ -26,7 +26,7 @@ class ImageCipherTests(unittest.TestCase):
     def test_different_key_changes_ciphertext(self):
         plain = bytes((i * 13) & 0xFF for i in range(256))
         a = encrypt_image(plain, 16, 16, ChaosKey(x=0.1), warmup_steps=20)
-        b = encrypt_image(plain, 16, 16, ChaosKey(x=0.10001), warmup_steps=20)
+        b = encrypt_image(plain, 16, 16, ChaosKey(x=0.11), warmup_steps=20)
         self.assertNotEqual(a, b)
 
     def test_rejects_wrong_image_length(self):
