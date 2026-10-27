@@ -5,9 +5,10 @@ Research-oriented Python reference model for a hardware-oriented chaos-based ima
 ## Project status
 
 - **Milestone 1:** Floating-point Lorenz system with explicit midpoint RK2 and tests.
-- **Milestone 2 (initial implementation):** Signed fixed-point arithmetic and a fixed-point Lorenz/RK2 model with tests. The default format is 32-bit signed with 19 fractional bits; treat this as a candidate to validate, not a final hardware choice.
+- **Milestone 2:** Signed fixed-point arithmetic and a fixed-point Lorenz/RK2 model with tests. The default format is 32-bit signed with 19 fractional bits; treat this as a candidate to validate, not a final hardware choice.
+- **Milestone 3 (baseline implementation):** Pure-Python grayscale byte-image permutation and chained-XOR diffusion, with inverse decryption and round-trip tests.
 
-This is a research scaffold, not a secure encryption implementation. Image permutation/diffusion, keystream evaluation, and FPGA comparison are future milestones. A chaotic trajectory and passing statistical tests alone do not establish cryptographic security.
+This is a research baseline, **not a production-secure cipher**. The permutation uses a modulo-based Fisher-Yates index and the diffusion keystream is a simple byte extraction from the fixed-point Lorenz state. These design choices are for reproducible hardware/software experiments, not claims of cryptographic strength. Do not use this code to protect sensitive images. A chaotic trajectory, key sensitivity, or passing statistical tests alone do not establish cryptographic security.
 
 ## Requirements
 
@@ -28,8 +29,31 @@ python scripts/run_lorenz_demo.py
 From the `python/` directory:
 
 ```bash
-python -m unittest discover -s tests -v
+python3 -m unittest discover -s tests -v
 ```
+
+## Image cipher API
+
+Module: `src/chaos_image_encryption/image_cipher.py`
+
+The API accepts a flat sequence of 8-bit grayscale pixels and explicit width/height. The image length must equal `width * height`.
+
+```python
+from chaos_image_encryption.image_cipher import ChaosKey, encrypt_image, decrypt_image
+
+pixels = bytes((i * 17) & 0xFF for i in range(128 * 128))
+key = ChaosKey(x=0.1, y=0.2, z=0.3)
+cipher = encrypt_image(pixels, 128, 128, key, warmup_steps=1000)
+recovered = decrypt_image(cipher, 128, 128, key, warmup_steps=1000)
+assert recovered == pixels
+```
+
+Encryption and decryption must use identical key, dimensions, warm-up count, step size, and fixed-point format. The implementation first shuffles source-pixel indices with Fisher-Yates, then applies chained XOR diffusion. The inverse operation reconstructs the original pixel order.
+
+Current limitations:
+- The code accepts raw pixel bytes; image-file decoding/encoding (for example PNG) is not yet included.
+- No claims are made about NIST SP 800-22, NPCR/UACI, correlation, throughput, or FPGA resource use; these must be measured separately.
+- The current byte extraction and modulo shuffle are baseline choices to evaluate and potentially replace during the research.
 
 ## Floating-point model
 
