@@ -2,7 +2,7 @@
 
 **Research repository:** fixed-point chaotic image encryption, bit-accurate software modelling, RTL verification, and FPGA implementation.
 
-> **Status:** Active research / hardware integration. This repository is being expanded from the Python reference implementation into a reproducible software–hardware project. FPGA image-transfer firmware and end-to-end on-board image tests are not yet verified. Do not interpret software metrics as FPGA measurements.
+> **Status:** Active research / hardware integration. Archived dashboard records now show three exact-recovery PASS entries for the Zybo Z7-10 label, but the dashboard explicitly identifies itself as a demonstration fallback reading saved experiment folders rather than performing a live hardware transaction. These are archived records, not yet independently verified physical FPGA measurements.
 
 ## Research goals
 
@@ -13,19 +13,22 @@
 5. Measure image statistics, execution time, throughput, FPGA resource use, timing, and power reproducibly.
 6. Compare results with published methods under equivalent conditions.
 
-## Existing evidence (separate by implementation/configuration)
+## Evidence summary
 
 | Evidence | Current record | Scope |
 |---|---:|---|
 | Python test suite | 46/46 tests passed | Previously reported software test run; rerun from clean checkout |
-| XOR baseline NPCR | 93.07% | Previous 128×128 grayscale software experiment |
-| XOR baseline UACI | 30.29% | Same baseline experiment |
-| Permutation + diffusion NPCR | 99.5355% | Previous software experiment |
-| Permutation + diffusion UACI | 32.7599% | Same software experiment |
-| FPGA RTL verification | V7 AXI-stream adapter testbench exists | Simulation evidence only |
-| Physical FPGA image upload | Not yet verified | Requires matching ARM firmware / UART-to-DMA bridge |
+| XOR baseline NPCR / UACI | 93.07% / 30.29% | Previous 128×128 grayscale software experiment |
+| Permutation + diffusion NPCR / UACI | 99.5355% / 32.7599% | Previous software experiment |
+| Archived dashboard recovery | 3 × PASS; 16,384 matching pixels each | User screenshots; dashboard states demonstration fallback, not live hardware transaction |
+| Archived dashboard NPCR | 99.8596% in all 3 records | Same provenance limitation; metric protocol/raw files not yet audited |
+| Archived dashboard UACI | 30.8834%, 30.6938%, 30.3743% | Same provenance limitation |
+| Archived dashboard entropy | 7.9892, 7.9901, 7.9869 bits/pixel | Same provenance limitation |
+| Physical FPGA image upload | Not independently verified | Requires raw transaction evidence and matching ARM firmware / UART-to-DMA bridge |
 
-These values are historical project notes, not a claim of superiority over published methods. Regenerate them with scripts, fixed test images, parameter files, and raw outputs before promotion to a final comparison.
+Full transcription and provenance notes: [Archived FPGA dashboard runs](results/fpga/ARCHIVED_DASHBOARD_RUNS.md).
+
+The archived NPCR values are numerically above the prior software record, while the UACI values are below it. Do not claim overall improvement or superiority until both implementations are measured with the same image, key, perturbation protocol, and metric code. Regenerate results with scripts, fixed test images, parameter files, and raw outputs.
 
 ## Hardware target and architecture
 
@@ -67,10 +70,10 @@ We compare only like-for-like measurements. Security diagnostics (entropy, adjac
 - Distinguish published-paper values from our own measured values.
 - Cite original papers and identify exact table/figure/page for extracted results.
 - NPCR/UACI and histogram/entropy tests are statistical diagnostics, not proof of cryptographic security.
-- Do not describe the physical FPGA path as complete until a host-to-board encrypt/decrypt round trip is demonstrated.
+- Do not describe the physical FPGA path as complete until a host-to-board encrypt/decrypt round trip is demonstrated and supported by transaction logs.
 
 ## Current next milestone
 
-Complete and verify the Zynq ARM UART-to-AXI-DMA firmware path, transfer a known 128×128 grayscale image, encrypt it on the FPGA, decrypt it, and verify byte-for-byte recovery. See [docs/FPGA_STATUS.md](docs/FPGA_STATUS.md).
+Obtain the raw archived run folders and verify their provenance. Then complete the Zynq ARM UART-to-AXI-DMA firmware path, transfer a known 128×128 grayscale image, encrypt it on the physical FPGA, decrypt it, and verify byte-for-byte recovery. See [docs/FPGA_STATUS.md](docs/FPGA_STATUS.md).
 
 See [literature/README.md](literature/README.md) and [literature/COMPARISON.md](literature/COMPARISON.md) for the initial review.
