@@ -1,0 +1,1 @@
+design_revision,device,tool_version,clock_mhz,wns_ns,tns_ns,lut_count,lut_percent,ff_count,ff_percent,bram_count,bram_percent,dsp_count,dsp_percent,power_w,power_source,image_width,image_height,channels,latency_ms,throughput_mbps,measurement_scope,raw_log,commit_sha
