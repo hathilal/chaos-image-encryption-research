@@ -1,0 +1,4 @@
+run_id,run_timestamp_local,board_label,exact_recovery,matching_pixels,input_bytes,entropy_bits_per_pixel,npcr_percent,uaci_percent,distinct_ciphertext_values,source,status
+paired_20261124_094043_935727_fpga,2026-11-24T09:40:54+05:30,Zybo Z7-10,PASS,16384,16384,7.9892,99.8596,30.8834,NR,User screenshot of archived experiment dashboard,archived_dashboard_record_not_live_hardware_verified
+paired_20261124_070145_627667_fpga,2026-11-24T07:01:56+05:30,Zybo Z7-10,PASS,16384,16384,7.9901,99.8596,30.6938,NR,User screenshot of archived experiment dashboard,archived_dashboard_record_not_live_hardware_verified
+20261124_094235_999667,2026-11-24T09:42:45+05:30,Zybo Z7-10,PASS,16384,16384,7.9869,99.8596,30.3743,NR,User screenshot of archived experiment dashboard,archived_dashboard_record_not_live_hardware_verified
