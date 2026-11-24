@@ -1,156 +1,153 @@
-# Software Golden Model and Research Web Platform
+# Software Reference Model and Research Dashboard
 
-This document describes the software side of the project separately from RTL simulation and physical FPGA evidence. It records the currently documented implementation and known limitations.
+This document describes the software components currently present in this repository. It separates the installable Python reference package from the research algorithms used by the Streamlit dashboard. It also distinguishes saved dashboard records from verified physical FPGA execution.
 
-## 1. Python golden/reference model
+## 1. Repository software components
 
-Location: `python/`
+There are two Python code areas with different purposes:
 
-The Python package is the algorithmic reference used to reason about the numerical model and reversible image transformation. Its documented modules include:
+| Path | Purpose | Documentation |
+|---|---|---|
+| `python/src/chaos_image_encryption/` | Installable reference package: Lorenz model, fixed-point arithmetic, and grayscale byte-image cipher | `python/README.md` |
+| `python/research/chaos_cipher/` | Research algorithms, analysis, and experiment modules used by the dashboard | `python/research/README.md` |
+| `dashboard/` | Streamlit user interface, software experiment integration, saved experiment display, and host-side serial interface | `dashboard/README.md` |
 
-| Module | Responsibility |
-|---|---|
-| `fixed_point.py` | Signed fixed-point arithmetic and overflow behavior |
-| `lorenz.py` | Lorenz chaotic-system integration using explicit midpoint RK2 |
-| `image_cipher.py` | Grayscale pixel permutation, chained-XOR diffusion, inverse decryption |
+Do not assume the two Python code areas implement identical algorithms or numerical formats. In particular, the Q19 fixed-point contract described in `python/README.md` belongs to the installable reference package. Research algorithms under `python/research/chaos_cipher/` have their own implementation and parameters.
 
-### Fixed-point contract
+## 2. Installable Python reference package
 
-- Signed two's-complement representation.
-- Default word width: 32 bits.
-- Default fractional width: 19 bits (Q format described in the Python README).
-- Float conversion: round-to-nearest, ties away from zero.
-- Multiplication: full-width product followed by arithmetic shift by fractional width.
-- Overflow policy: `raise` by default or explicit `wrap`.
-- Negative right shifts follow Python arithmetic-shift semantics.
+Location: `python/src/chaos_image_encryption/`
 
-The RTL must match operation order, widths, rounding and overflow semantics to claim bit-exact agreement. The Python README explicitly treats Q19 as a candidate configuration that requires range/divergence validation, not a final universally optimal choice.
+The package documentation describes:
+- a floating-point Lorenz system using explicit midpoint RK2;
+- signed fixed-point arithmetic;
+- a fixed-point Lorenz/RK2 model;
+- grayscale byte-image permutation and chained-XOR diffusion;
+- inverse decryption and round-trip tests.
 
-### Image cipher flow
+The documented default fixed-point format for this package is 32-bit signed with 19 fractional bits. Float conversion uses round-to-nearest, ties away from zero. Multiplication uses a full-width integer product followed by an arithmetic right shift. The overflow policy is explicit (`raise` by default or `wrap`).
 
-1. Accept a flat byte sequence representing an 8-bit grayscale image.
-2. Validate that the number of bytes equals width × height.
-3. Generate a deterministic permutation using a Fisher-Yates-style shuffle.
-4. Apply chained XOR diffusion using bytes derived from the fixed-point Lorenz state.
-5. Decrypt by reversing diffusion and permutation.
+These are reference-model semantics, not evidence that the format is optimal or that a particular RTL revision is bit-exact. RTL equivalence requires matching operation order, intermediate widths, rounding, overflow, and test vectors.
 
-The current implementation is a research baseline, not a production-secure cipher. The Python documentation explicitly warns that chaotic trajectories, key sensitivity and statistical tests alone do not prove cryptographic security.
-
-### Tests and reproduction
-
-The Python package has unit tests for fixed-point arithmetic, Lorenz behavior and image-cipher round trips. The project history reports 46/46 tests passing; this is a previously reported run and should be rerun in CI from a clean checkout before being presented as a current passing build.
+### Run package tests
 
 From the repository root:
 
 ```bash
 cd python
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt
+python -m pip install --upgrade pip
 python -m pip install -e .
-pytest
+python -m unittest discover -s tests -v
 ```
 
-The Python package README also documents the standard-library unittest invocation:
+The package currently declares Python >=3.10 and no third-party runtime dependencies in `python/pyproject.toml`.
+
+## 3. Research algorithms
+
+Location: `python/research/chaos_cipher/`
+
+This directory contains the research implementation and analysis modules used by the dashboard. The adjacent `tests/` directory contains its test suite, and `reports/` contains generated metrics, CSV/JSON results, and plots.
+
+### Run research tests
+
+From the repository root:
 
 ```bash
-cd python
+cd python/research
 python3 -m unittest discover -s tests -v
 ```
 
-### Current software-model limitations
+Example analysis modules:
 
-- The API operates on raw grayscale pixel bytes; image-file decode/encode is not documented as part of the package.
-- The current shuffle and diffusion are baseline constructions for hardware/software experimentation.
-- The Python reference is not automatically a bit-accurate oracle for every RTL revision. Exact equivalence must be tested against the matching RTL revision and parameters.
-- Performance and security metrics must be generated by separate reproducible analysis scripts; they must not be inferred from round-trip unit tests.
-
-## 2. Research web application / dashboard
-
-The project includes a browser-based research dashboard in the `fpga-research-studio-dev` workspace, with experiment records stored in local experiment folders. The dashboard was used to inspect and present saved image-encryption experiment runs, including image recovery status and metrics such as entropy, NPCR and UACI.
-
-The project inspection found experiment archives in:
-- `fpga-research-studio-dev/experiments/`
-- `P5_Project_Evidence/05_Website_Demonstration/live_runs/`
-- UI-fix copies and an `archive_before_fresh_start` directory.
-
-The canonical archive has not yet been selected. Duplicate UI-fix copies and backups must not be counted as independent experiments. Preserve pair manifests and linked software/FPGA run folders together.
-
-### Dashboard evidence limitation
-
-The supplied dashboard screenshots explicitly displayed a demonstration-fallback notice: the page reads saved experiment folders and does not perform a live hardware transaction. Therefore:
-- The dashboard is evidence visualization and experiment-record presentation.
-- Its displayed PASS values must be traced to the underlying run files.
-- A dashboard label such as FPGA does not, by itself, prove a physical-board transaction.
-- Do not describe the web application as controlling the board live unless a real host-to-board transaction is implemented and logged.
-
-### Web-platform documentation still required
-
-The following should be added when the source and canonical run schema are inspected:
-- screenshots of the actual UI, with version/date captions;
-- page-by-page feature guide and navigation flow;
-- frontend/backend architecture and exact framework/dependency versions;
-- experiment JSON schema and field definitions;
-- how the dashboard loads, validates and renders saved runs;
-- pair-manifest semantics and how software/FPGA runs are associated;
-- reproducible local setup and launch commands;
-- automated tests and CI status;
-- security/privacy notes and data-retention behavior.
-
-Do not invent a framework, API, live hardware capability or deployment status that is not verified from source.
-
-## 3. Software analysis and experiment tooling
-
-The wider project workspace contains analysis outputs covering:
-- cipher evaluation and cipher comparison;
-- differential batch and differential comparison;
-- bidirectional validation;
-- key sensitivity and permutation key sensitivity;
-- finite-precision analysis;
-- warm-up sensitivity;
-- five-image validation;
-- diffusion-direction comparison.
-
-These are promising research assets. Before publishing them as benchmark results, record for each:
-- script and algorithm revision;
-- exact input image(s), dimensions and SHA-256;
-- key and parameter configuration;
-- number of trials and randomization protocol;
-- metric definitions and implementation;
-- raw per-trial outputs, not just averages;
-- environment and dependency versions;
-- whether the result is software-only, RTL simulation, or physical FPGA.
-
-Recommended future layout:
-
-```text
-software/
-  golden_model/
-  analysis/
-  datasets/
-  schemas/
-  tests/
-web/
-  frontend/
-  backend/
-  schemas/
-  tests/
-  screenshots/
-results/
-  software/
-  rtl/
-  fpga/
+```bash
+python3 -m chaos_cipher.validate_bidirectional
+python3 -m chaos_cipher.test_key_sensitivity
 ```
 
-This is a recommended target structure, not a claim that all these directories currently exist.
+Run these commands from `python/research/` so that the `chaos_cipher` package is on the module search path.
 
-## 4. Evidence classification
+The research README warns that the implementations are experimental and not suitable for protecting sensitive data without further cryptographic analysis. Statistical image metrics alone do not establish cryptographic security.
 
-| Layer | What it can prove | What it cannot prove alone |
-|---|---|---|
-| Python unit tests | Model functions and round-trip behavior under tested cases | RTL correctness or physical FPGA operation |
-| Python analysis scripts | Statistical/performance results for specified software runs | Hardware throughput or cryptographic security |
-| Dashboard | Saved experiment records and their visual presentation | That a live FPGA transaction occurred |
-| RTL testbench | Simulated RTL behavior under testbench conditions | Physical board behavior |
-| Vivado implementation reports | Timing/resource results for a specific routed netlist | Host-to-board image transfer or measured board power |
-| Physical board transaction logs | Hardware operation when board, bitstream and transfer are traceable | Security against cryptanalysis without further evaluation |
+## 4. Streamlit research dashboard
+
+Location: `dashboard/`
+
+The application entry point is `dashboard/app.py`. It integrates research algorithms through `dashboard/software_engine.py` and contains a host-side serial interface in `dashboard/fpga_link.py`.
+
+Documented dashboard capabilities include:
+- software encryption and decryption experiments;
+- XOR baseline, forward permutation-diffusion, and bidirectional diffusion;
+- saved software and FPGA-labelled experiment records;
+- image, hash, timing, recovery, and statistical metric presentation;
+- paired software/FPGA experiment comparisons where records are available.
+
+### Local installation and launch
+
+From the repository root:
+
+```bash
+python3 -m venv .venv-dashboard
+source .venv-dashboard/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r dashboard/requirements.txt
+streamlit run dashboard/app.py
+```
+
+The dashboard dependencies are listed in `dashboard/requirements.txt`. The app stores local artifacts and experiment records in the dashboard workspace. Do not assume records created on one machine are automatically available on another.
+
+### Hosted deployment status
+
+This repository contains the dashboard source code and local run instructions. A public hosted deployment URL has not been verified. Running `streamlit run` locally is not the same as deploying a public website.
+
+## 5. Experiment provenance and archived records
+
+Dashboard records are stored under `dashboard/experiments/`; preserved historical files are under `dashboard/archive_before_fresh_start/`. The dashboard classifies records without explicit `execution_provenance: live_execution` metadata as historical/restored.
+
+The archived records documented in `results/fpga/ARCHIVED_DASHBOARD_RUNS.md` must be treated as historical evidence. The dashboard has previously displayed a demonstration-fallback notice indicating that it was reading saved experiment folders rather than performing a live hardware transaction.
+
+A dashboard label, a PASS label, an image, or a metric is not sufficient by itself to prove a physical FPGA run. To support a hardware claim, retain at minimum:
+- exact board and device;
+- exact bitstream hash and firmware identity;
+- source revision and build reports;
+- input image and SHA-256;
+- raw ciphertext/recovered payloads and SHA-256 values;
+- timestamped host/board transaction log;
+- exact recovery comparison;
+- metric script, parameters, and raw outputs.
+
+Do not count duplicate backup folders or UI-fix copies as independent experiments.
+
+## 6. FPGA host interface and protocol limitation
+
+The host-side dashboard interface documents a serial framing protocol:
+- host to target: `CHAO` + operation byte + 16,384 image bytes;
+- target to host: `RDY!` + `DONE` + 16,384 output bytes;
+- default host serial port: `/dev/ttyUSB1`.
+
+The V7 FPGA architecture described in `docs/FPGA_STATUS.md` uses a Zynq Processing System, AXI DMA, and an AXI4-Stream adapter. That adapter does not parse the host serial framing. Matching Zynq PS firmware is required to receive the serial data and submit it through DMA.
+
+**Do not treat the dashboard's host serial interface and the V7 AXI-stream adapter as an integrated, verified hardware path.** Verify the firmware, protocol, bitstream, and board identity before attempting a physical transaction.
+
+## 7. Reproducible research reporting
+
+For each experiment, record:
+- algorithm name and source revision;
+- input image, dimensions, pixel format, and SHA-256;
+- key, initialization values, warm-up count, and all algorithm parameters;
+- number of trials and perturbation/randomization protocol;
+- metric definitions and implementation revision;
+- raw per-trial outputs, not only averages;
+- Python/dependency versions and execution environment;
+- evidence class: software, RTL simulation, FPGA implementation report, archived record, or physical board.
+
+Separate security diagnostics (entropy, correlation, NPCR, UACI, key sensitivity) from implementation metrics (latency, throughput, LUT/FF/BRAM/DSP, timing, and power). Neither category alone proves cryptographic security.
+
+## 8. Known limitations
+
+- The image-cipher reference package accepts raw grayscale pixel bytes; its README does not document general image-file I/O as part of the package API.
+- The algorithms are experimental baselines, not production cryptography.
+- The dashboard's saved experiment view does not independently establish live hardware execution.
+- The physical FPGA encrypt/decrypt round trip remains unverified in the repository's current status notes.
+- A public hosted dashboard deployment has not been verified.
