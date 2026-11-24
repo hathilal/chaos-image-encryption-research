@@ -30,6 +30,10 @@ Full transcription and provenance notes: [Archived FPGA dashboard runs](results/
 
 The archived NPCR values are numerically above the prior software record, while the UACI values are below it. Do not claim overall improvement or superiority until both implementations are measured with the same image, key, perturbation protocol, and metric code. Regenerate results with scripts, fixed test images, parameter files, and raw outputs.
 
+## Software and web platform
+
+The repository includes a Python golden/reference model for Lorenz RK2 dynamics, signed fixed-point arithmetic, reversible grayscale permutation and chained-XOR diffusion. It also includes a research web dashboard used to inspect saved experiment folders and display experiment metrics. The dashboard screenshots identify a demonstration-fallback mode; saved records are not proof of live FPGA transactions. See [Software Golden Model and Research Web Platform](docs/SOFTWARE_AND_WEB_PLATFORM.md) and [Python reference documentation](python/README.md).
+
 ## Hardware target and architecture
 
 - Board: Digilent Zybo Z7-10
@@ -41,10 +45,11 @@ The archived NPCR values are numerically above the prior software record, while 
 
 ## Repository map
 
-- `docs/` — architecture, verification, literature and experiment protocols
+- `docs/` — architecture, verification, software/web platform, literature and experiment protocols
 - `literature/` — paper-by-paper evidence and comparison table
 - `results/` — machine-readable software and FPGA results
-- `python/` — reference model and tests
+- `python/` — Python golden/reference model and tests
+- `fpga-research-studio-dev/` — research dashboard workspace is maintained in the wider project workspace; canonical source and deployment details still need to be imported/documented
 - `rtl/` — RTL modules and testbenches (V7 sources to be integrated)
 - `firmware/` — Zynq PS UART/DMA application (not yet verified)
 - `scripts/` — reproducible experiment and analysis scripts
