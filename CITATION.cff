@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use this research code, please cite the repository and its associated research report."
+title: "ChaosForge: Reproducible Chaos-Based Image Encryption on FPGA"
+type: software
+authors:
+  - family-names: Guguloth
+    given-names: Hathilal
+repository-code: "https://github.com/hathilal/chaos-image-encryption-research"
