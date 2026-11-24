@@ -1,0 +1,30 @@
+[
+  {
+    "key_variant": "baseline",
+    "exact_recovery": true
+  },
+  {
+    "key_variant": "x0_plus_1e-6",
+    "exact_recovery": true,
+    "npcr_percent": 0.0,
+    "uaci_percent": 0.0,
+    "changed_ciphertext_bytes": 0,
+    "wrong_key_recovers_plaintext": true
+  },
+  {
+    "key_variant": "y0_plus_1e-6",
+    "exact_recovery": true,
+    "npcr_percent": 0.0,
+    "uaci_percent": 0.0,
+    "changed_ciphertext_bytes": 0,
+    "wrong_key_recovers_plaintext": true
+  },
+  {
+    "key_variant": "z0_plus_1e-6",
+    "exact_recovery": true,
+    "npcr_percent": 0.0,
+    "uaci_percent": 0.0,
+    "changed_ciphertext_bytes": 0,
+    "wrong_key_recovers_plaintext": true
+  }
+]

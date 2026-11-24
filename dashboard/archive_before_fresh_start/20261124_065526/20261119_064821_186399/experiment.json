@@ -1,0 +1,16 @@
+{
+  "run_id": "20261119_064821_186399",
+  "operation": "encrypt",
+  "port": "/dev/ttyUSB1",
+  "status": "SUCCESS",
+  "input_sha256": "4d2f297e9615aa5dc5adae42b2a9b7b6cb353d029e18211974e09751a7730a8c",
+  "output_sha256": "c52102743f663d3b9b96f92b217961b4c0dfbf1e37914a58933e90dd9c6fad46",
+  "timings": {
+    "handshake_seconds": 0.002534031984396279,
+    "host_write_seconds": 1.4228479400044307,
+    "wait_for_completion_seconds": 0.03278601300553419,
+    "host_read_seconds": 1.4239796420151833,
+    "round_trip_seconds": 3.1857439409941435
+  },
+  "timestamp": "2026-11-19T06:48:21.192229+05:30"
+}

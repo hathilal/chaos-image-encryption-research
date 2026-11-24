@@ -1,0 +1,2 @@
+experiment,image_width,image_height,plaintext_bytes,fixed_point_format,base_x0,perturbed_x0,base_x0_q16_16,perturbed_x0_q16_16,fixed_point_lsb_difference,warmup_iterations,changed_ciphertext_bytes,npcr_percent,uaci_percent,baseline_exact_recovery,perturbed_key_exact_recovery,ciphertexts_identical,interpretation
+Q16.16 x0 one-LSB key sensitivity,128,128,16384,signed Q16.16,1.0,1.0000152587890625,65536,65537,1,100,15442,94.25048828125,30.660831227022058,True,True,False,One-LSB sensitivity measurement for the XOR baseline; not a cryptographic security proof.

@@ -1,0 +1,56 @@
+{
+  "run_id": "paired_20261124_065001_502561_fpga",
+  "paired_run_id": "20261124_065001_502561",
+  "shared_input_sha256": "5ff8cd89978b0ee042170196763e56ad0dd24f0dd8063e7b29b81e40cd584557",
+  "execution_mode": "paired",
+  "timestamp": "2026-11-24T06:50:12.260903+05:30",
+  "platform": "Zybo Z7-10",
+  "interface": "UART",
+  "port": "/dev/ttyUSB1",
+  "image_dimensions": [
+    128,
+    128
+  ],
+  "input_bytes": 16384,
+  "input_sha256": "5ff8cd89978b0ee042170196763e56ad0dd24f0dd8063e7b29b81e40cd584557",
+  "ciphertext_sha256": "c3e5dc2267b85f2483a0c5636c28b1e8a3a887394727ff1f22ed7a711c0f796b",
+  "recovered_sha256": "5ff8cd89978b0ee042170196763e56ad0dd24f0dd8063e7b29b81e40cd584557",
+  "exact_recovery": true,
+  "matching_pixels": 16384,
+  "mismatched_pixels": 0,
+  "analysis": {
+    "ciphertext_entropy_bits_per_pixel": 7.98693667361553,
+    "neighbor_correlations": {
+      "horizontal": 0.0018870380507573438,
+      "vertical": -0.011692643907812364,
+      "diagonal": -0.01762043078651684
+    },
+    "differential_metrics": {
+      "npcr_percent": 99.859619140625,
+      "uaci_percent": 30.374325022977942
+    }
+  },
+  "timings": {
+    "encryption": {
+      "handshake_seconds": 0.003020069001649972,
+      "host_write_seconds": 1.4236021589968004,
+      "wait_for_completion_seconds": 0.048648583000613144,
+      "host_read_seconds": 1.4236167449998902,
+      "round_trip_seconds": 3.2010302509988833
+    },
+    "decryption": {
+      "handshake_seconds": 0.002918484002293553,
+      "host_write_seconds": 1.4228751580012613,
+      "wait_for_completion_seconds": 0.04841922400009935,
+      "host_read_seconds": 1.4238600229982694,
+      "round_trip_seconds": 3.2005188670009375
+    },
+    "differential_test_encryption": {
+      "handshake_seconds": 0.0022703939976054244,
+      "host_write_seconds": 1.423400430001493,
+      "wait_for_completion_seconds": 0.0481786189993727,
+      "host_read_seconds": 1.4239889050004422,
+      "round_trip_seconds": 3.2001389489996654
+    }
+  }
+}

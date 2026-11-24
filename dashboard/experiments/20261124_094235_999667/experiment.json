@@ -1,0 +1,53 @@
+{
+  "run_id": "20261124_094235_999667",
+  "timestamp": "2026-11-24T09:42:45.622511+05:30",
+  "platform": "Zybo Z7-10",
+  "interface": "UART",
+  "port": "/dev/ttyUSB1",
+  "image_dimensions": [
+    128,
+    128
+  ],
+  "input_bytes": 16384,
+  "input_sha256": "5ff8cd89978b0ee042170196763e56ad0dd24f0dd8063e7b29b81e40cd584557",
+  "ciphertext_sha256": "c3e5dc2267b85f2483a0c5636c28b1e8a3a887394727ff1f22ed7a711c0f796b",
+  "recovered_sha256": "5ff8cd89978b0ee042170196763e56ad0dd24f0dd8063e7b29b81e40cd584557",
+  "exact_recovery": true,
+  "matching_pixels": 16384,
+  "mismatched_pixels": 0,
+  "analysis": {
+    "ciphertext_entropy_bits_per_pixel": 7.98693667361553,
+    "neighbor_correlations": {
+      "horizontal": 0.0018870380507573438,
+      "vertical": -0.011692643907812364,
+      "diagonal": -0.01762043078651684
+    },
+    "differential_metrics": {
+      "npcr_percent": 99.859619140625,
+      "uaci_percent": 30.374325022977942
+    }
+  },
+  "timings": {
+    "encryption": {
+      "handshake_seconds": 0.0034815789986168966,
+      "host_write_seconds": 1.422182962000079,
+      "wait_for_completion_seconds": 0.04976156699922285,
+      "host_read_seconds": 1.4239146699983394,
+      "round_trip_seconds": 3.20089732100314
+    },
+    "decryption": {
+      "handshake_seconds": 0.0012371379998512566,
+      "host_write_seconds": 1.4222723790007876,
+      "wait_for_completion_seconds": 0.04978509900320205,
+      "host_read_seconds": 1.4239294449980662,
+      "round_trip_seconds": 3.199138112999208
+    },
+    "differential_test_encryption": {
+      "handshake_seconds": 0.015912348000711063,
+      "host_write_seconds": 1.422449592002522,
+      "wait_for_completion_seconds": 0.049541264001163654,
+      "host_read_seconds": 1.4239363689994207,
+      "round_trip_seconds": 3.2132488949973776
+    }
+  }
+}

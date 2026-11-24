@@ -1,0 +1,492 @@
+{
+  "experiment": "Batch single-bit plaintext differential sensitivity",
+  "parameters": {
+    "width": 128,
+    "height": 128,
+    "plaintext_bytes": 16384,
+    "key_x0": 1.0,
+    "key_y0": 1.0,
+    "key_z0": 1.0,
+    "warmup": 100,
+    "permutation_diffusion_iv": 0,
+    "random_seed": 20261028,
+    "positions_tested": 25,
+    "change": "Flip the least significant bit of one plaintext byte"
+  },
+  "summary": [
+    {
+      "cipher": "xor_baseline",
+      "positions_tested": 25,
+      "mean_changed_ciphertext_bytes": 1,
+      "sd_changed_ciphertext_bytes": 0.0,
+      "mean_npcr_percent": 0.006103515625,
+      "sd_npcr_percent": 0.0,
+      "mean_uaci_percent": 2.3935355392156862e-05,
+      "sd_uaci_percent": 0.0,
+      "all_exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "positions_tested": 25,
+      "mean_changed_ciphertext_bytes": 8548.68,
+      "sd_changed_ciphertext_bytes": 4567.811471956054,
+      "mean_npcr_percent": 52.177001953125,
+      "sd_npcr_percent": 27.879708691138024,
+      "mean_uaci_percent": 0.4008645450367647,
+      "sd_uaci_percent": 0.22316436940713327,
+      "all_exact_recovery": true
+    }
+  ],
+  "per_position": [
+    {
+      "cipher": "xor_baseline",
+      "position": "top_left",
+      "byte_index": 0,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "top_left",
+      "byte_index": 0,
+      "changed_ciphertext_bytes": 3996,
+      "npcr_percent": 24.3896484375,
+      "uaci_percent": 0.16252106311274508,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "top_right",
+      "byte_index": 127,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "top_right",
+      "byte_index": 127,
+      "changed_ciphertext_bytes": 15226,
+      "npcr_percent": 92.93212890625,
+      "uaci_percent": 0.7231349571078431,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "bottom_left",
+      "byte_index": 16256,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "bottom_left",
+      "byte_index": 16256,
+      "changed_ciphertext_bytes": 5308,
+      "npcr_percent": 32.3974609375,
+      "uaci_percent": 0.2547200520833333,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "bottom_right",
+      "byte_index": 16383,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "bottom_right",
+      "byte_index": 16383,
+      "changed_ciphertext_bytes": 6154,
+      "npcr_percent": 37.56103515625,
+      "uaci_percent": 0.26888978247549017,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "center",
+      "byte_index": 8256,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "center",
+      "byte_index": 8256,
+      "changed_ciphertext_bytes": 5602,
+      "npcr_percent": 34.19189453125,
+      "uaci_percent": 0.23743872549019607,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_01",
+      "byte_index": 1488,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_01",
+      "byte_index": 1488,
+      "changed_ciphertext_bytes": 9289,
+      "npcr_percent": 56.695556640625,
+      "uaci_percent": 0.42904124540441174,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_02",
+      "byte_index": 6951,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_02",
+      "byte_index": 6951,
+      "changed_ciphertext_bytes": 6738,
+      "npcr_percent": 41.12548828125,
+      "uaci_percent": 0.3071863511029412,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_03",
+      "byte_index": 1231,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_03",
+      "byte_index": 1231,
+      "changed_ciphertext_bytes": 5252,
+      "npcr_percent": 32.0556640625,
+      "uaci_percent": 0.22906135110294118,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_04",
+      "byte_index": 16359,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_04",
+      "byte_index": 16359,
+      "changed_ciphertext_bytes": 8910,
+      "npcr_percent": 54.38232421875,
+      "uaci_percent": 0.41389016544117646,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_05",
+      "byte_index": 4651,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_05",
+      "byte_index": 4651,
+      "changed_ciphertext_bytes": 8239,
+      "npcr_percent": 50.286865234375,
+      "uaci_percent": 0.36135206035539214,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_06",
+      "byte_index": 8613,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_06",
+      "byte_index": 8613,
+      "changed_ciphertext_bytes": 13183,
+      "npcr_percent": 80.462646484375,
+      "uaci_percent": 0.6438371246936274,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_07",
+      "byte_index": 236,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_07",
+      "byte_index": 236,
+      "changed_ciphertext_bytes": 15642,
+      "npcr_percent": 95.47119140625,
+      "uaci_percent": 0.7391716452205882,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_08",
+      "byte_index": 15052,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_08",
+      "byte_index": 15052,
+      "changed_ciphertext_bytes": 6052,
+      "npcr_percent": 36.9384765625,
+      "uaci_percent": 0.2846871170343137,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_09",
+      "byte_index": 7641,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_09",
+      "byte_index": 7641,
+      "changed_ciphertext_bytes": 11417,
+      "npcr_percent": 69.683837890625,
+      "uaci_percent": 0.5772489659926471,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_10",
+      "byte_index": 7092,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_10",
+      "byte_index": 7092,
+      "changed_ciphertext_bytes": 16220,
+      "npcr_percent": 98.9990234375,
+      "uaci_percent": 0.7712450214460784,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_11",
+      "byte_index": 1088,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_11",
+      "byte_index": 1088,
+      "changed_ciphertext_bytes": 12832,
+      "npcr_percent": 78.3203125,
+      "uaci_percent": 0.6354358149509803,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_12",
+      "byte_index": 43,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_12",
+      "byte_index": 43,
+      "changed_ciphertext_bytes": 601,
+      "npcr_percent": 3.668212890625,
+      "uaci_percent": 0.0326238893995098,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_13",
+      "byte_index": 6975,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_13",
+      "byte_index": 6975,
+      "changed_ciphertext_bytes": 9844,
+      "npcr_percent": 60.0830078125,
+      "uaci_percent": 0.4544845281862745,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_14",
+      "byte_index": 15047,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_14",
+      "byte_index": 15047,
+      "changed_ciphertext_bytes": 3043,
+      "npcr_percent": 18.572998046875,
+      "uaci_percent": 0.1397106694240196,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_15",
+      "byte_index": 13345,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_15",
+      "byte_index": 13345,
+      "changed_ciphertext_bytes": 2147,
+      "npcr_percent": 13.104248046875,
+      "uaci_percent": 0.10610543045343138,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_16",
+      "byte_index": 11561,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_16",
+      "byte_index": 11561,
+      "changed_ciphertext_bytes": 7088,
+      "npcr_percent": 43.26171875,
+      "uaci_percent": 0.31556372549019607,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_17",
+      "byte_index": 6687,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_17",
+      "byte_index": 6687,
+      "changed_ciphertext_bytes": 7563,
+      "npcr_percent": 46.160888671875,
+      "uaci_percent": 0.3330125995710784,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_18",
+      "byte_index": 7032,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_18",
+      "byte_index": 7032,
+      "changed_ciphertext_bytes": 13217,
+      "npcr_percent": 80.670166015625,
+      "uaci_percent": 0.6446509267769608,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_19",
+      "byte_index": 15197,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_19",
+      "byte_index": 15197,
+      "changed_ciphertext_bytes": 4313,
+      "npcr_percent": 26.324462890625,
+      "uaci_percent": 0.21266563265931374,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "xor_baseline",
+      "position": "random_20",
+      "byte_index": 2826,
+      "changed_ciphertext_bytes": 1,
+      "npcr_percent": 0.006103515625,
+      "uaci_percent": 2.3935355392156862e-05,
+      "exact_recovery": true
+    },
+    {
+      "cipher": "permutation_diffusion",
+      "position": "random_20",
+      "byte_index": 2826,
+      "changed_ciphertext_bytes": 15841,
+      "npcr_percent": 96.685791015625,
+      "uaci_percent": 0.7439347809436274,
+      "exact_recovery": true
+    }
+  ]
+}

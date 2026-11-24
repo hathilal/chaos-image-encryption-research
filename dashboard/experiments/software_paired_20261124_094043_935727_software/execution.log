@@ -1,0 +1,13 @@
+[2026-11-24T09:40:43.993+05:30] SOFTWARE EXPERIMENT STARTED
+[2026-11-24T09:40:43.993+05:30] Algorithm: Bidirectional permutation-diffusion
+[2026-11-24T09:40:43.993+05:30] Input bytes: 16384
+[2026-11-24T09:40:43.994+05:30] Input SHA-256: 2534664b908285a1b8b3e70a04effed88bc79b695851ba36d0af81a5959d64a3
+[2026-11-24T09:40:43.994+05:30] Starting Python encryption
+[2026-11-24T09:40:44.297+05:30] Python encryption completed: 0.303714 seconds
+[2026-11-24T09:40:44.297+05:30] Starting Python decryption
+[2026-11-24T09:40:44.571+05:30] Python decryption completed: 0.273732 seconds
+[2026-11-24T09:40:44.571+05:30] Recovery verification: 16384/16384 pixels match
+[2026-11-24T09:40:44.571+05:30] EXACT RECOVERY: PASS
+[2026-11-24T09:40:44.853+05:30] Differential test completed
+[2026-11-24T09:40:44.853+05:30] Ciphertext analysis completed
+[2026-11-24T09:40:44.853+05:30] SOFTWARE EXPERIMENT FINISHED
