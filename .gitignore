@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+
+# Vivado generated output
+.Xil/
+.cache/
+.gen/
+.runs/
+.sim/
+.hw/
+*.jou
+*.log
+*.str
+*.wdb
+*.vcd
+*.pb
+*.backup.*
+*.xpr.user
+*.hwdef
+*.ltx
+
+# Vitis generated output
+.Xilinx/
+.metadata/
+.platform/
+Debug/
+Release/
+_component.xml
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local secrets / machine-specific settings
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Large generated artifacts: explicitly choose what to track
+*.elf
+*.bit
+*.bin
+*.mcs
+*.ltx
